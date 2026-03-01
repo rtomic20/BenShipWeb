@@ -1,37 +1,86 @@
+import { useState, useEffect } from 'react'
 import { useLang } from '../contexts/LangContext'
+
+/* ── 4 fotografije brodova (Pexels — besplatne za komercijalnu upotrebu) ──
+   Svaka se prikazuje 7 sekundi, crossfade 1.5s, Ken Burns na svakoj.        */
+const IMAGES = [
+  {
+    url: 'https://images.pexels.com/photos/3840441/pexels-photo-3840441.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    position: 'center 40%',   // aerijalni pogled, brod na otvorenom moru
+  },
+  {
+    url: 'https://images.pexels.com/photos/3278012/pexels-photo-3278012.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    position: 'center 50%',   // brod bočno na moru, dnevno svjetlo
+  },
+  {
+    url: 'https://images.pexels.com/photos/2231743/pexels-photo-2231743.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    position: 'center 35%',   // drone pogled, rđava oplatnica vs plavo more
+  },
+  {
+    url: 'https://images.pexels.com/photos/1554646/pexels-photo-1554646.jpeg?auto=compress&cs=tinysrgb&w=1920',
+    position: 'center 45%',   // aerijalni pogled, luka
+  },
+]
+
+const SLIDE_DURATION = 7000  // ms koliko se prikazuje svaka slika
+const FADE_DURATION  = 1500  // ms crossfade prijelaz
 
 export default function Hero() {
   const { t } = useLang()
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent(i => (i + 1) % IMAGES.length)
+    }, SLIDE_DURATION)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center text-white overflow-hidden"
     >
-      {/* ── Ken Burns background ─────────────────────────────
-          Odvojen div od sadržaja — animacija scale+pan ne utječe
-          na layout ni klikabilnost sadržaja iznad.             */}
+      {/* ── Preload svih slika u memoriju ──────────────────── */}
+      {IMAGES.map(img => (
+        <img key={img.url} src={img.url} alt="" style={{ display: 'none' }} aria-hidden="true" />
+      ))}
+
+      {/* ── Ken Burns slideshow ─────────────────────────────
+          Sve slike su uvijek prisutne; samo opacity se mijenja.
+          Ken Burns teče kontinuirano na svakoj — kad slika
+          postane aktivna, zatekne je negdje usred animacije
+          što daje lijepi prirodni osjećaj kretanja.             */}
+      {IMAGES.map((img, i) => (
+        <div
+          key={img.url}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: `url('${img.url}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: img.position,
+            opacity: i === current ? 1 : 0,
+            transition: `opacity ${FADE_DURATION}ms ease-in-out`,
+            animation: 'kenBurns 22s ease-in-out infinite alternate',
+            willChange: 'transform, opacity',
+            zIndex: 1,
+          }}
+        />
+      ))}
+
+      {/* ── Tamni overlay ───────────────────────────────────── */}
       <div
-        className="absolute inset-0"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80&auto=format&fit=crop')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 40%',
-          animation: 'kenBurns 22s ease-in-out infinite alternate',
-          willChange: 'transform',
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, rgba(13,31,60,0.65) 0%, rgba(13,31,60,0.42) 50%, rgba(13,31,60,0.88) 100%)',
+          zIndex: 2,
         }}
       />
 
-      {/* Tamni overlay — daje čitljivost tekstu */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(13,31,60,0.65) 0%, rgba(13,31,60,0.45) 50%, rgba(13,31,60,0.85) 100%)',
-        }}
-      />
-
-      {/* Wave divider */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
+      {/* ── Wave divider ─────────────────────────────────── */}
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 4 }}>
         <svg
           viewBox="0 0 1440 60"
           fill="none"
@@ -44,14 +93,17 @@ export default function Hero() {
       </div>
 
       {/* ── Sadržaj ──────────────────────────────────────── */}
-      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <div
+        className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center"
+        style={{ zIndex: 10 }}
+      >
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[#C9A84C]/60 bg-[#C9A84C]/10 text-[#C9A84C] text-sm font-medium tracking-wider uppercase">
           <span>⚓</span>
           <span>Ship Chandler · Croatia</span>
         </div>
 
-        {/* Glavni naslov */}
+        {/* Naslov */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-5 whitespace-pre-line drop-shadow-lg">
           {t.hero_title}
         </h1>
@@ -74,8 +126,28 @@ export default function Hero() {
           {t.hero_cta}
         </a>
 
+        {/* ── Indikator točkice — klik mijenja sliku ─────── */}
+        <div className="mt-10 flex items-center justify-center gap-2">
+          {IMAGES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              aria-label={`Slika ${i + 1}`}
+              style={{
+                height: '8px',
+                width: i === current ? '24px' : '8px',
+                borderRadius: '9999px',
+                background: i === current ? '#C9A84C' : 'rgba(255,255,255,0.35)',
+                transition: 'all 0.4s ease',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            />
+          ))}
+        </div>
+
         {/* Scroll indikator */}
-        <div className="mt-14 flex flex-col items-center gap-2 animate-bounce opacity-50">
+        <div className="mt-8 flex flex-col items-center gap-2 animate-bounce opacity-50">
           <span className="text-xs uppercase tracking-widest">Scroll</span>
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

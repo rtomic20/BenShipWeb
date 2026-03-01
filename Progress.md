@@ -66,20 +66,31 @@ BenShipWeb/
 - Transparentan → solid pri scrollu (useEffect + `scrollY > 50`)
 
 ### Hero
-- **Ken Burns efekt** — odvojen background `<div>` s animacijom:
-  - `scale(1.18) translateX(4%)` → `scale(1.0) translateX(-4%)`
-  - Trajanje 22s, `ease-in-out`, `infinite alternate` (gore-dolje bez skipanja)
-  - `willChange: transform` za GPU akceleraciju
-- Fotografija kontejnerskog broda (Unsplash, photo-1558618666-fcd25c85cd64)
-- Dark overlay gradient: 65% → 45% → 85% navy (čitljivost teksta)
-- Inspirativni citat u kurzivu: *"Na moru nema zastoja — ni u našoj predanosti"*
-- Badge, naslov, podnaslov, CTA gumb → `#kontakt`
+- **Ken Burns slideshow** — 4 fotografije brodova (Pexels, besplatne za komercijalnu upotrebu):
+  | Redoslijed | Pexels ID | Opis |
+  |---|---|---|
+  | 1 | 3840441 | Aerijalni pogled, brod na otvorenom moru (Tom Fisk) |
+  | 2 | 3278012 | Brod bočno na moru, dnevno svjetlo |
+  | 3 | 2231743 | Drone pogled, rđava oplatnica vs plavo more |
+  | 4 | 1554646 | Aerijalni pogled na luku |
+- Svaka slika se prikazuje **7 sekundi**, crossfade prijelaz **1.5s**
+- Ken Burns animacija (`scale 1.18→1.0 + translateX ±4%`) teče kontinuirano na svim slikama
+- Klikabilne točkice (pill indikatori) — ručno prebacivanje slike
+- Preload svih slika (`<img display:none>`) — nema trzanja pri prijelazu
+- Tamni overlay gradient: 65% → 42% → 88% navy
+- Inspirativni citat u kurzivu zlatne boje
 - SVG wave divider (bijeli, 60px)
 
 #### CSS animacije (styles.css)
 | Keyframe | Opis |
 |---|---|
-| `kenBurns` | `scale+translateX/Y` na background divu — cinematični efekt kretanja |
+| `kenBurns` | `scale+translateX/Y` na svakom background divu |
+
+### Redoslijed sekcija
+Poravnato s redoslijedom u navbaru:
+```
+Hero → O nama → Usluge → Zaposlenici → Kontakt
+```
 
 ### Zaposlenici (`#zaposlenici`) — nova sekcija
 - Navy pozadina (#0D1F3C), bijeli tekst — vizualno se ističe od ostatka

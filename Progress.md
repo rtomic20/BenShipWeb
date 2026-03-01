@@ -59,6 +59,7 @@ BenShipWeb/
 
 ### Navbar
 - Tekst logo: **BEN** (gold) **SHIP** (white) **SUPPLY** (sivo, hidden na xs)
+- *Isprobano: logo slika u bijelom containeru — reverted nazad na tekst (nije dobro izgledalo na navy bg)*
 - Anchor linkovi: O nama · Usluge · **Zaposlenici** · Kontakt
 - HR/EN toggle (zastavica + oznaka)
 - Hamburger za mobile (animirani X)
@@ -155,7 +156,7 @@ npx vite build
 | Scaffold + deps | ✅ |
 | Tailwind v4 config | ✅ |
 | LangContext HR/EN | ✅ |
-| Navbar (tekst logo + Zaposlenici link) | ✅ |
+| Navbar (tekst logo — BEN/SHIP/SUPPLY) | ✅ |
 | Hero (Ken Burns efekt, brod foto, citat) | ✅ |
 | Zaposlenici sekcija | ✅ |
 | About | ✅ |

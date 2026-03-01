@@ -21,7 +21,8 @@ Gradi se odvojeno od ShipChandler upravljačke aplikacije.
 ```
 BenShipWeb/
 ├── public/
-│   └── logo.svg                  ← BEN SHIP SVG logotip
+│   ├── benship-logo.jpg          ← originalni logo firme (WhatsApp slika)
+│   └── logo.svg                  ← rezervni SVG logotip
 ├── src/
 │   ├── main.tsx                  ← entry point, import styles.css
 │   ├── App.tsx                   ← LangProvider + sve sekcije vertikalno
@@ -57,7 +58,7 @@ BenShipWeb/
 ## Sekcije i što imaju
 
 ### Navbar
-- Logo (BEN gold + SHIP white)
+- Originalni logo firme (`benship-logo.jpg`) u bijelom rounded containeru
 - Anchor linkovi: O nama · Usluge · Kontakt
 - HR/EN toggle (zastavica + oznaka)
 - Hamburger za mobile (animirani X)
@@ -65,11 +66,28 @@ BenShipWeb/
 
 ### Hero
 - Fullscreen Unsplash fotografija (more/brod) s tamnim gradientom
-- SVG wave divider prema dolje (bijeli)
+- **3 animirana broda** koji plove desna → lijeva (SVG silhuete, bez copyrighta):
+  - `ContainerShip` — veliki kontejnerski brod (380 px, 32 s, opacity 0.58)
+  - `CargoShip` — srednji cargo brod (265 px, 44 s, opacity 0.38)
+  - `Tanker` — mali tanker u daljini (175 px, 58 s, opacity 0.25)
+- Svaki brod ima **dvije neovisne animacije**:
+  - `sail` (outer div) — translateX: `110vw → calc(-100% - 40px)`
+  - `bob` (inner div) — translateY: ±6 px, sinusni val (simulira valove)
+- Brodovi imaju animirani dim iz dimnjaka (`@keyframes smoke`)
+- Negativni `animation-delay` → brodovi vidljivi čim se stranica učita
+- `pointer-events: none` → brodovi ne blokiraju klikove na sadržaj
+- SVG wave divider prema dolje (bijeli, `height: 60px`)
 - Badge "⚓ Ship Chandler · Croatia"
 - Slogan mijenja se s jezikom (`\n` za prijelom retka)
 - CTA gumb → `#kontakt`
 - Scroll animacija strelica
+
+#### CSS animacije (styles.css)
+| Keyframe | Opis |
+|---|---|
+| `sail` | `translateX(110vw → calc(-100% - 40px))` — horizontalno kretanje |
+| `bob` | `translateY(0 → -6px → 0)` — ljuljanje na valovima |
+| `smoke` | `translateY + scale + opacity` — dim iz dimnjaka broda |
 
 ### About (`#o-nama`)
 - 2-stupčani layout (lg): tekst lijevo, stat kartice desno
@@ -133,8 +151,8 @@ npx vite build
 | Scaffold + deps | ✅ |
 | Tailwind v4 config | ✅ |
 | LangContext HR/EN | ✅ |
-| Navbar | ✅ |
-| Hero | ✅ |
+| Navbar (originalni logo) | ✅ |
+| Hero + animirani brodovi | ✅ |
 | About | ✅ |
 | Services | ✅ |
 | Contact (Netlify form) | ✅ |

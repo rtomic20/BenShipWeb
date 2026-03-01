@@ -141,7 +141,7 @@ const strings = {
   },
 } as const
 
-type Strings = typeof strings['hr']
+type Strings = (typeof strings)[Lang]
 
 interface LangContextType {
   lang: Lang

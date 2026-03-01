@@ -28,12 +28,10 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#" className="shrink-0">
-            <img
-              src="/benship-logo.jpg"
-              alt="Ben Ship Supply"
-              className="h-12 w-auto object-contain rounded"
-            />
+          <a href="#" className="flex items-center gap-2 shrink-0">
+            <span className="text-2xl font-bold text-[#C9A84C]">BEN</span>
+            <span className="text-2xl font-light text-white">SHIP</span>
+            <span className="text-xs text-white/60 ml-1 hidden sm:block tracking-widest uppercase">Supply</span>
           </a>
 
           {/* Desktop nav */}

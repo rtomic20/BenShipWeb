@@ -8,13 +8,11 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Logo */}
-          <a href="#">
-            <img
-              src="/benship-logo.jpg"
-              alt="Ben Ship Supply"
-              className="h-16 w-auto object-contain rounded"
-            />
-          </a>
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-bold text-[#C9A84C]">BEN</span>
+            <span className="text-xl font-light text-white">SHIP</span>
+            <span className="text-xs text-white/40 ml-1">SUPPLY</span>
+          </div>
 
           {/* Nav anchors */}
           <nav className="flex items-center gap-6 text-sm">

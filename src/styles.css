@@ -14,21 +14,8 @@ body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
-/* ── Ship sailing animation ─────────────────────────────── */
-/* Outer wrapper: moves ship left across screen              */
-@keyframes sail {
-  from { transform: translateX(110vw); }
-  to   { transform: translateX(calc(-100% - 40px)); }
-}
-
-/* Inner wrapper: gentle vertical bob on waves              */
-@keyframes bob {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-6px); }
-}
-
-/* Smoke puffs from funnel                                  */
-@keyframes smoke {
-  0%   { transform: translateY(0) scale(1);   opacity: 0.5; }
-  100% { transform: translateY(-28px) scale(2.5); opacity: 0; }
+/* ── Ken Burns — polako zumira i kliže po slici broda ─── */
+@keyframes kenBurns {
+  0%   { transform: scale(1.18) translateX(4%) translateY(1%); }
+  100% { transform: scale(1.0)  translateX(-4%) translateY(-1%); }
 }

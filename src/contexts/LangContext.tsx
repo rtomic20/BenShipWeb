@@ -7,10 +7,12 @@ const strings = {
     // Navbar
     nav_about: 'O nama',
     nav_services: 'Usluge',
+    nav_team: 'Zaposlenici',
     nav_contact: 'Kontakt',
 
     // Hero
     hero_title: 'Sve što vaš brod treba —\nna jednom mjestu',
+    hero_quote: '"Na moru nema zastoja — ni u našoj predanosti vašem brodu."',
     hero_subtitle: 'Profesionalni ship chandler s višedesetljetnim iskustvom u opskrbi brodova u Hrvatskoj.',
     hero_cta: 'Kontaktirajte nas',
 
@@ -58,6 +60,14 @@ const strings = {
     form_submit: 'Pošalji poruku',
     form_success: 'Hvala! Vaša poruka je poslana.',
 
+    // Team
+    team_title: 'Naš tim',
+    team_subtitle: 'Iskustvo i predanost koje stoje iza svakog broda koji opskrbljujemo.',
+    team_role_mauro: 'Direktor',
+    team_role_zdenka: 'Voditeljica nabave',
+    team_role_bojan: 'Operativni menadžer',
+    team_role_zeljko: 'Komercijalista',
+
     // Footer
     footer_copy: '© 2025 Ben Ship Supply. Sva prava pridržana.',
   },
@@ -65,10 +75,12 @@ const strings = {
     // Navbar
     nav_about: 'About',
     nav_services: 'Services',
+    nav_team: 'Team',
     nav_contact: 'Contact',
 
     // Hero
     hero_title: 'Everything your vessel needs —\nin one place',
+    hero_quote: '"There are no delays at sea — nor in our commitment to your vessel."',
     hero_subtitle: 'Professional ship chandler with decades of experience supplying vessels in Croatia.',
     hero_cta: 'Contact us',
 
@@ -115,6 +127,14 @@ const strings = {
     form_message: 'Message',
     form_submit: 'Send message',
     form_success: 'Thank you! Your message has been sent.',
+
+    // Team
+    team_title: 'Our Team',
+    team_subtitle: 'The experience and dedication behind every vessel we supply.',
+    team_role_mauro: 'CEO',
+    team_role_zdenka: 'Head of Procurement',
+    team_role_bojan: 'Operations Manager',
+    team_role_zeljko: 'Sales Manager',
 
     // Footer
     footer_copy: '© 2025 Ben Ship Supply. All rights reserved.',

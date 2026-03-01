@@ -58,36 +58,40 @@ BenShipWeb/
 ## Sekcije i što imaju
 
 ### Navbar
-- Originalni logo firme (`benship-logo.jpg`) u bijelom rounded containeru
-- Anchor linkovi: O nama · Usluge · Kontakt
+- Tekst logo: **BEN** (gold) **SHIP** (white) **SUPPLY** (sivo, hidden na xs)
+- Anchor linkovi: O nama · Usluge · **Zaposlenici** · Kontakt
 - HR/EN toggle (zastavica + oznaka)
 - Hamburger za mobile (animirani X)
 - Transparentan → solid pri scrollu (useEffect + `scrollY > 50`)
 
 ### Hero
-- Fullscreen Unsplash fotografija (more/brod) s tamnim gradientom
-- **3 animirana broda** koji plove desna → lijeva (SVG silhuete, bez copyrighta):
-  - `ContainerShip` — veliki kontejnerski brod (380 px, 32 s, opacity 0.58)
-  - `CargoShip` — srednji cargo brod (265 px, 44 s, opacity 0.38)
-  - `Tanker` — mali tanker u daljini (175 px, 58 s, opacity 0.25)
-- Svaki brod ima **dvije neovisne animacije**:
-  - `sail` (outer div) — translateX: `110vw → calc(-100% - 40px)`
-  - `bob` (inner div) — translateY: ±6 px, sinusni val (simulira valove)
-- Brodovi imaju animirani dim iz dimnjaka (`@keyframes smoke`)
-- Negativni `animation-delay` → brodovi vidljivi čim se stranica učita
-- `pointer-events: none` → brodovi ne blokiraju klikove na sadržaj
-- SVG wave divider prema dolje (bijeli, `height: 60px`)
-- Badge "⚓ Ship Chandler · Croatia"
-- Slogan mijenja se s jezikom (`\n` za prijelom retka)
-- CTA gumb → `#kontakt`
-- Scroll animacija strelica
+- **Ken Burns efekt** — odvojen background `<div>` s animacijom:
+  - `scale(1.18) translateX(4%)` → `scale(1.0) translateX(-4%)`
+  - Trajanje 22s, `ease-in-out`, `infinite alternate` (gore-dolje bez skipanja)
+  - `willChange: transform` za GPU akceleraciju
+- Fotografija kontejnerskog broda (Unsplash, photo-1558618666-fcd25c85cd64)
+- Dark overlay gradient: 65% → 45% → 85% navy (čitljivost teksta)
+- Inspirativni citat u kurzivu: *"Na moru nema zastoja — ni u našoj predanosti"*
+- Badge, naslov, podnaslov, CTA gumb → `#kontakt`
+- SVG wave divider (bijeli, 60px)
 
 #### CSS animacije (styles.css)
 | Keyframe | Opis |
 |---|---|
-| `sail` | `translateX(110vw → calc(-100% - 40px))` — horizontalno kretanje |
-| `bob` | `translateY(0 → -6px → 0)` — ljuljanje na valovima |
-| `smoke` | `translateY + scale + opacity` — dim iz dimnjaka broda |
+| `kenBurns` | `scale+translateX/Y` na background divu — cinematični efekt kretanja |
+
+### Zaposlenici (`#zaposlenici`) — nova sekcija
+- Navy pozadina (#0D1F3C), bijeli tekst — vizualno se ističe od ostatka
+- 4 kartice u gridu (2 stupca mobile, 4 desktop)
+- Avatar: `ui-avatars.com` — inicijali na navy pozadini, zlatni tekst
+- Hover efekt: zlatni border ring + name mijenja boju + linija se produljuje
+- Zaposlenici i pozicije:
+  | Ime | Pozicija (HR) | Pozicija (EN) |
+  |---|---|---|
+  | Mauro Kesovija | Direktor | CEO |
+  | Zdenka Perović | Voditeljica nabave | Head of Procurement |
+  | Bojan Vukelić | Operativni menadžer | Operations Manager |
+  | Željko Kesovija | Komercijalista | Sales Manager |
 
 ### About (`#o-nama`)
 - 2-stupčani layout (lg): tekst lijevo, stat kartice desno
@@ -151,8 +155,9 @@ npx vite build
 | Scaffold + deps | ✅ |
 | Tailwind v4 config | ✅ |
 | LangContext HR/EN | ✅ |
-| Navbar (originalni logo) | ✅ |
-| Hero + animirani brodovi | ✅ |
+| Navbar (tekst logo + Zaposlenici link) | ✅ |
+| Hero (Ken Burns efekt, brod foto, citat) | ✅ |
+| Zaposlenici sekcija | ✅ |
 | About | ✅ |
 | Services | ✅ |
 | Contact (Netlify form) | ✅ |

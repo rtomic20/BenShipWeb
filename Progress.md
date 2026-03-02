@@ -100,14 +100,15 @@ Hero → O nama → Usluge → Zaposlenici → Kontakt
 - Zaposlenici i pozicije:
   | Ime | Pozicija (HR) | Pozicija (EN) |
   |---|---|---|
-  | Mauro Kesovija | Direktor | CEO |
-  | Zdenka Perović | Voditeljica nabave | Head of Procurement |
+  | Zdenka Perović | Direktorica | CEO |
+  | Mauro Kesovija | Voditelj nabave | Head of Procurement |
   | Bojan Vukelić | Operativni menadžer | Operations Manager |
-  | Željko Kesovija | Komercijalista | Sales Manager |
+  | Željko Kesovija | Voditelj tehničke nabave | Technical Procurement Manager |
 
 ### About (`#o-nama`)
 - 2-stupčani layout (lg): tekst lijevo, stat kartice desno
-- 3 kartice: 25+ godina · 500+ brodova · 24/7
+- 3 kartice: 36+ godina (od 1990.) · 10.000+ brodova · 24/7
+- About tekst: povijest tvrtke od 1990. u Rijeci
 
 ### Services (`#usluge`)
 - 6 kartica u grid (1 → 2 → 3 kolone)
@@ -115,7 +116,7 @@ Hero → O nama → Usluge → Zaposlenici → Kontakt
 - Hover: zlatni border + zlatna ikona
 
 ### Contact (`#kontakt`)
-- Lijevo: adresa, telefon, email, radno vrijeme s ikonama
+- Lijevo: adresa (Riva boduli 1, Rijeka), telefon, fax, email, radno vrijeme s ikonama
 - Desno: Netlify Forms forma (data-netlify="true")
   - Honeypot polje (spam zaštita)
   - Nakon submita: success state (zelena kvačica)
@@ -176,6 +177,6 @@ npx vite build
 | Footer | ✅ |
 | `vite build` bez grešaka | ✅ |
 | Git init + initial commit | ✅ |
-| GitHub push | ⬜ |
+| GitHub push | ✅ |
 | Netlify deploy | ⬜ |
 | Vlastita domena | ⬜ (opcionalno) |
